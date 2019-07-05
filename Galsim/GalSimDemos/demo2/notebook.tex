@@ -1,0 +1,552 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Understanding Demo2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Copyright (c) 2012\PYZhy{}2018 by the GalSim developers team on GitHub}
+         \PY{c+c1}{\PYZsh{} https://github.com/GalSim\PYZhy{}developers}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} This file is part of GalSim: The modular galaxy image simulation toolkit.}
+         \PY{c+c1}{\PYZsh{} https://github.com/GalSim\PYZhy{}developers/GalSim}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} GalSim is free software: redistribution and use in source and binary forms,}
+         \PY{c+c1}{\PYZsh{} with or without modification, are permitted provided that the following}
+         \PY{c+c1}{\PYZsh{} conditions are met:}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} 1. Redistributions of source code must retain the above copyright notice, this}
+         \PY{c+c1}{\PYZsh{}    list of conditions, and the disclaimer given in the accompanying LICENSE}
+         \PY{c+c1}{\PYZsh{}    file.}
+         \PY{c+c1}{\PYZsh{} 2. Redistributions in binary form must reproduce the above copyright notice,}
+         \PY{c+c1}{\PYZsh{}    this list of conditions, and the disclaimer given in the documentation}
+         \PY{c+c1}{\PYZsh{}    and/or other materials provided with the distribution.}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{Demo \PYZsh{}2}
+         \PY{l+s+sd}{The second script in our tutorial about using GalSim in python scripts: examples/demo*.py.}
+         \PY{l+s+sd}{(This file is designed to be viewed in a window 100 characters wide.)}
+         \PY{l+s+sd}{This script is a bit more sophisticated, but still pretty basic.  We\PYZsq{}re still only making}
+         \PY{l+s+sd}{a single image, but now the galaxy has an exponential radial profile and is sheared.}
+         \PY{l+s+sd}{The PSF is a circular Moffat profile.  The noise is drawn from a Poisson distribution}
+         \PY{l+s+sd}{using the flux from both the object and a background sky level to determine the}
+         \PY{l+s+sd}{variance in each pixel.}
+         \PY{l+s+sd}{New features introduced in this demo:}
+         \PY{l+s+sd}{\PYZhy{} obj = galsim.Exponential(flux, scale\PYZus{}radius)}
+         \PY{l+s+sd}{\PYZhy{} obj = galsim.Moffat(beta, flux, half\PYZus{}light\PYZus{}radius)}
+         \PY{l+s+sd}{\PYZhy{} obj = obj.shear(g1, g2)  \PYZhy{}\PYZhy{} with explanation of other ways to specify shear}
+         \PY{l+s+sd}{\PYZhy{} rng = galsim.BaseDeviate(seed)}
+         \PY{l+s+sd}{\PYZhy{} noise = galsim.PoissonNoise(rng, sky\PYZus{}level)}
+         \PY{l+s+sd}{\PYZhy{} galsim.hsm.EstimateShear(image, image\PYZus{}epsf)}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{logging}
+         \PY{k+kn}{import} \PY{n+nn}{galsim}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{astropy.visualization} \PY{k+kn}{import} \PY{n}{astropy\PYZus{}mpl\PYZus{}style}
+         \PY{c+c1}{\PYZsh{} plt.style.use(astropy\PYZus{}mpl\PYZus{}style)}
+         \PY{k+kn}{from} \PY{n+nn}{astropy.utils.data} \PY{k+kn}{import} \PY{n}{get\PYZus{}pkg\PYZus{}data\PYZus{}filename}
+         \PY{k+kn}{from} \PY{n+nn}{astropy.io} \PY{k+kn}{import} \PY{n}{fits}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{n}{argv}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    A little bit more sophisticated, but still pretty basic:}
+         \PY{l+s+sd}{      \PYZhy{} Use a sheared, exponential profile for the galaxy.}
+         \PY{l+s+sd}{      \PYZhy{} Convolve it by a circular Moffat PSF.}
+         \PY{l+s+sd}{      \PYZhy{} Add Poisson noise to the image.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} In non\PYZhy{}script code, use getLogger(\PYZus{}\PYZus{}name\PYZus{}\PYZus{}) at module scope instead.}
+             \PY{n}{logging}\PY{o}{.}\PY{n}{basicConfig}\PY{p}{(}\PY{n}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}(message)s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{level}\PY{o}{=}\PY{n}{logging}\PY{o}{.}\PY{n}{INFO}\PY{p}{,} \PY{n}{stream}\PY{o}{=}\PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{p}{)}
+             \PY{n}{logger} \PY{o}{=} \PY{n}{logging}\PY{o}{.}\PY{n}{getLogger}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{demo2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{gal\PYZus{}flux} \PY{o}{=} \PY{l+m+mf}{1.e5}    \PY{c+c1}{\PYZsh{} counts}
+             \PY{n}{gal\PYZus{}r0} \PY{o}{=} \PY{l+m+mf}{2.7}       \PY{c+c1}{\PYZsh{} arcsec}
+             \PY{n}{g1} \PY{o}{=} \PY{l+m+mf}{0.1}           \PY{c+c1}{\PYZsh{}}
+             \PY{n}{g2} \PY{o}{=} \PY{l+m+mf}{0.2}           \PY{c+c1}{\PYZsh{}}
+             \PY{n}{psf\PYZus{}beta} \PY{o}{=} \PY{l+m+mi}{5}       \PY{c+c1}{\PYZsh{}}
+             \PY{n}{psf\PYZus{}re} \PY{o}{=} \PY{l+m+mf}{1.0}       \PY{c+c1}{\PYZsh{} arcsec}
+             \PY{n}{pixel\PYZus{}scale} \PY{o}{=} \PY{l+m+mf}{0.2}  \PY{c+c1}{\PYZsh{} arcsec / pixel}
+             \PY{n}{sky\PYZus{}level} \PY{o}{=} \PY{l+m+mf}{2.5e3}  \PY{c+c1}{\PYZsh{} counts / arcsec\PYZca{}2}
+         
+             \PY{c+c1}{\PYZsh{} This time use a particular seed, so the image is deterministic.}
+             \PY{c+c1}{\PYZsh{} This is the same seed that is used in demo2.yaml, which means the images produced}
+             \PY{c+c1}{\PYZsh{} by the two methods will be precisely identical.}
+             \PY{n}{random\PYZus{}seed} \PY{o}{=} \PY{l+m+mi}{1534225}
+         
+         
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Starting demo script 2 using:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    \PYZhy{} sheared (}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{,}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{) exponential galaxy (flux = }\PY{l+s+si}{\PYZpc{}.1e}\PY{l+s+s1}{, scale radius = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{),}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{g1}\PY{p}{,} \PY{n}{g2}\PY{p}{,} \PY{n}{gal\PYZus{}flux}\PY{p}{,} \PY{n}{gal\PYZus{}r0}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    \PYZhy{} circular Moffat PSF (beta = }\PY{l+s+si}{\PYZpc{}.1f}\PY{l+s+s1}{, re = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{),}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{psf\PYZus{}beta}\PY{p}{,} \PY{n}{psf\PYZus{}re}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    \PYZhy{} pixel scale = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    \PYZhy{} Poisson noise (sky level = }\PY{l+s+si}{\PYZpc{}.1e}\PY{l+s+s1}{).}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sky\PYZus{}level}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Initialize the (pseudo\PYZhy{})random number generator that we will be using below.}
+             \PY{c+c1}{\PYZsh{} For a technical reason that will be explained later (demo9.py), we add 1 to the}
+             \PY{c+c1}{\PYZsh{} given random seed here.}
+             \PY{n}{rng} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{BaseDeviate}\PY{p}{(}\PY{n}{random\PYZus{}seed}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Define the galaxy profile.}
+             \PY{n}{galexp} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{Exponential}\PY{p}{(}\PY{n}{flux}\PY{o}{=}\PY{n}{gal\PYZus{}flux}\PY{p}{,} \PY{n}{scale\PYZus{}radius}\PY{o}{=}\PY{n}{gal\PYZus{}r0}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{n}{original\PYZus{}GalImage} \PY{o}{=} \PY{n}{galexp}\PY{o}{.}\PY{n}{drawImage}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             \PY{n}{file\PYZus{}name\PYZus{}original\PYZus{}GalImage} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{demo2\PYZus{}original\PYZus{}GalImage.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{original\PYZus{}GalImage}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{file\PYZus{}name\PYZus{}original\PYZus{}GalImage}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{c+c1}{\PYZsh{} Shear the galaxy by some value.}
+             \PY{c+c1}{\PYZsh{} There are quite a few ways you can use to specify a shape.}
+             \PY{c+c1}{\PYZsh{} q, beta      Axis ratio and position angle: q = b/a, 0 \PYZlt{} q \PYZlt{} 1}
+             \PY{c+c1}{\PYZsh{} e, beta      Ellipticity and position angle: |e| = (1\PYZhy{}q\PYZca{}2)/(1+q\PYZca{}2)}
+             \PY{c+c1}{\PYZsh{} g, beta      (\PYZdq{}Reduced\PYZdq{}) Shear and position angle: |g| = (1\PYZhy{}q)/(1+q)}
+             \PY{c+c1}{\PYZsh{} eta, beta    Conformal shear and position angle: eta = ln(1/q)}
+             \PY{c+c1}{\PYZsh{} e1,e2        Ellipticity components: e1 = e cos(2 beta), e2 = e sin(2 beta)}
+             \PY{c+c1}{\PYZsh{} g1,g2        (\PYZdq{}Reduced\PYZdq{}) shear components: g1 = g cos(2 beta), g2 = g sin(2 beta)}
+             \PY{c+c1}{\PYZsh{} eta1,eta2    Conformal shear components: eta1 = eta cos(2 beta), eta2 = eta sin(2 beta)}
+             \PY{n}{gal} \PY{o}{=} \PY{n}{galexp}\PY{o}{.}\PY{n}{shear}\PY{p}{(}\PY{n}{g1}\PY{o}{=}\PY{n}{g1}\PY{p}{,} \PY{n}{g2}\PY{o}{=}\PY{n}{g2}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{n}{sheared\PYZus{}GalImage} \PY{o}{=} \PY{n}{gal}\PY{o}{.}\PY{n}{drawImage}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             \PY{n}{file\PYZus{}name\PYZus{}sheared\PYZus{}GalImage} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{demo2\PYZus{}sheared\PYZus{}GalImage.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{sheared\PYZus{}GalImage}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{file\PYZus{}name\PYZus{}sheared\PYZus{}GalImage}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             
+             \PY{n}{logger}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Made galaxy profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Define the PSF profile.}
+             \PY{n}{psf} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{Moffat}\PY{p}{(}\PY{n}{beta}\PY{o}{=}\PY{n}{psf\PYZus{}beta}\PY{p}{,} \PY{n}{flux}\PY{o}{=}\PY{l+m+mf}{1.}\PY{p}{,} \PY{n}{half\PYZus{}light\PYZus{}radius}\PY{o}{=}\PY{n}{psf\PYZus{}re}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{n}{sheared\PYZus{}GalImage} \PY{o}{=} \PY{n}{gal}\PY{o}{.}\PY{n}{drawImage}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             \PY{n}{file\PYZus{}name\PYZus{}sheared\PYZus{}GalImage} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{demo2\PYZus{}sheared\PYZus{}GalImage.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{sheared\PYZus{}GalImage}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{file\PYZus{}name\PYZus{}sheared\PYZus{}GalImage}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{n}{logger}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Made PSF profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Final profile is the convolution of these.}
+             \PY{n}{final} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{Convolve}\PY{p}{(}\PY{p}{[}\PY{n}{gal}\PY{p}{,} \PY{n}{psf}\PY{p}{]}\PY{p}{)}
+             \PY{n}{final\PYZus{}noNoise} \PY{o}{=} \PY{n}{final}\PY{o}{.}\PY{n}{drawImage}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             
+             \PY{n}{file\PYZus{}name\PYZus{}final\PYZus{}noNoise} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{demo2\PYZus{}final\PYZus{}noNoise.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{final\PYZus{}noNoise}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{file\PYZus{}name\PYZus{}final\PYZus{}noNoise}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Convolved components into final profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Draw the image with a particular pixel scale.}
+             \PY{n}{image} \PY{o}{=} \PY{n}{final}\PY{o}{.}\PY{n}{drawImage}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} The \PYZdq{}effective PSF\PYZdq{} is the PSF as drawn on an image, which includes the convolution}
+             \PY{c+c1}{\PYZsh{} by the pixel response.  We label it epsf here.}
+             \PY{n}{image\PYZus{}epsf} \PY{o}{=} \PY{n}{psf}\PY{o}{.}\PY{n}{drawImage}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{pixel\PYZus{}scale}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Made image of the profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} To get Poisson noise on the image, we will use a class called PoissonNoise.}
+             \PY{c+c1}{\PYZsh{} However, we want the noise to correspond to what you would get with a significant}
+             \PY{c+c1}{\PYZsh{} flux from tke sky.  This is done by telling PoissonNoise to add noise from a}
+             \PY{c+c1}{\PYZsh{} sky level in addition to the counts currently in the image.}
+             \PY{c+c1}{\PYZsh{}}
+             \PY{c+c1}{\PYZsh{} One wrinkle here is that the PoissonNoise class needs the sky level in each pixel,}
+             \PY{c+c1}{\PYZsh{} while we have a sky\PYZus{}level in counts per arcsec\PYZca{}2.  So we need to convert:}
+             \PY{n}{sky\PYZus{}level\PYZus{}pixel} \PY{o}{=} \PY{n}{sky\PYZus{}level} \PY{o}{*} \PY{n}{pixel\PYZus{}scale}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n}{noise} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{PoissonNoise}\PY{p}{(}\PY{n}{rng}\PY{p}{,} \PY{n}{sky\PYZus{}level}\PY{o}{=}\PY{n}{sky\PYZus{}level\PYZus{}pixel}\PY{p}{)}
+             \PY{n}{image}\PY{o}{.}\PY{n}{addNoise}\PY{p}{(}\PY{n}{noise}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Added Poisson noise}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Write the image to a file.}
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{os}\PY{o}{.}\PY{n}{mkdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{demo2.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{file\PYZus{}name\PYZus{}epsf} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{demo2\PYZus{}epsf.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{image}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{file\PYZus{}name}\PY{p}{)}
+             \PY{n}{image\PYZus{}epsf}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{file\PYZus{}name\PYZus{}epsf}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wrote image to }\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{file\PYZus{}name}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wrote effective PSF image to }\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{file\PYZus{}name\PYZus{}epsf}\PY{p}{)}
+         
+             \PY{n}{results} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{hsm}\PY{o}{.}\PY{n}{EstimateShear}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{image\PYZus{}epsf}\PY{p}{)}
+         
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HSM reports that the image has observed shape and size:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    e1 = }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{, e2 = }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{, sigma = }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{ (pixels)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{observed\PYZus{}shape}\PY{o}{.}\PY{n}{e1}\PY{p}{,}
+                         \PY{n}{results}\PY{o}{.}\PY{n}{observed\PYZus{}shape}\PY{o}{.}\PY{n}{e2}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{moments\PYZus{}sigma}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{When carrying out Regaussianization PSF correction, HSM reports distortions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    e1, e2 = }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{, }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{results}\PY{o}{.}\PY{n}{corrected\PYZus{}e1}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{corrected\PYZus{}e2}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected values in the limit that noise and non\PYZhy{}Gaussianity are negligible:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{exp\PYZus{}shear} \PY{o}{=} \PY{n}{galsim}\PY{o}{.}\PY{n}{Shear}\PY{p}{(}\PY{n}{g1}\PY{o}{=}\PY{n}{g1}\PY{p}{,} \PY{n}{g2}\PY{o}{=}\PY{n}{g2}\PY{p}{)}
+             \PY{n}{logger}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{    g1, g2 = }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{, }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{exp\PYZus{}shear}\PY{o}{.}\PY{n}{e1}\PY{p}{,}\PY{n}{exp\PYZus{}shear}\PY{o}{.}\PY{n}{e2}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{n}{main}\PY{p}{(}\PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Starting demo script 2 using:
+    - sheared (0.10,0.20) exponential galaxy (flux = 1.0e+05, scale radius = 2.70),
+    - circular Moffat PSF (beta = 5.0, re = 1.00),
+    - pixel scale = 0.20,
+    - Poisson noise (sky level = 2.5e+03).
+Wrote image to 'output/demo2.fits'
+Wrote effective PSF image to 'output/demo2\_epsf.fits'
+HSM reports that the image has observed shape and size:
+    e1 = 0.172, e2 = 0.357, sigma = 16.769 (pixels)
+When carrying out Regaussianization PSF correction, HSM reports distortions
+    e1, e2 = 0.188, 0.390
+Expected values in the limit that noise and non-Gaussianity are negligible:
+    g1, g2 = 0.190, 0.381
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{original\PYZus{}GalImage\PYZus{}file} \PY{o}{=} \PY{n}{get\PYZus{}pkg\PYZus{}data\PYZus{}filename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output/demo2\PYZus{}original\PYZus{}GalImage.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{original\PYZus{}GalImage\PYZus{}data} \PY{o}{=} \PY{n}{fits}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{n}{original\PYZus{}GalImage\PYZus{}file}\PY{p}{,} \PY{n}{ext}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{w} \PY{o}{=} \PY{l+m+mi}{8} 
+         \PY{n}{h} \PY{o}{=} \PY{l+m+mi}{8}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{h}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Galaxy with Exponential Profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{original\PYZus{}GalImage\PYZus{}data}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{sheared\PYZus{}GalImage\PYZus{}file} \PY{o}{=} \PY{n}{get\PYZus{}pkg\PYZus{}data\PYZus{}filename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output/demo2\PYZus{}sheared\PYZus{}GalImage.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sheared\PYZus{}GalImage\PYZus{}data} \PY{o}{=} \PY{n}{fits}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{n}{sheared\PYZus{}GalImage\PYZus{}file}\PY{p}{,} \PY{n}{ext}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{h}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sheared Galaxy with Exponential Profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{sheared\PYZus{}GalImage\PYZus{}data}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{PSF\PYZus{}Image\PYZus{}file} \PY{o}{=} \PY{n}{get\PYZus{}pkg\PYZus{}data\PYZus{}filename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output/demo2\PYZus{}epsf.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{PSF\PYZus{}Image\PYZus{}data} \PY{o}{=} \PY{n}{fits}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{n}{PSF\PYZus{}Image\PYZus{}file}\PY{p}{,} \PY{n}{ext}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{h}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PSF Moffat Profile }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{PSF\PYZus{}Image\PYZus{}data}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{final\PYZus{}noNoise\PYZus{}file} \PY{o}{=} \PY{n}{get\PYZus{}pkg\PYZus{}data\PYZus{}filename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output/demo2\PYZus{}final\PYZus{}noNoise.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{final\PYZus{}noNoise\PYZus{}data} \PY{o}{=} \PY{n}{fits}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{n}{final\PYZus{}noNoise\PYZus{}file}\PY{p}{,} \PY{n}{ext}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{h}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sheared image convolved with PSF giving Final Image (No Noise)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{final\PYZus{}noNoise\PYZus{}data}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{final\PYZus{}Image\PYZus{}file} \PY{o}{=} \PY{n}{get\PYZus{}pkg\PYZus{}data\PYZus{}filename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output/demo2.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{final\PYZus{}Image\PYZus{}data} \PY{o}{=} \PY{n}{fits}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{n}{final\PYZus{}Image\PYZus{}file}\PY{p}{,} \PY{n}{ext}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{h}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sheared image convolved with PSF giving Final Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{final\PYZus{}Image\PYZus{}data}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <matplotlib.image.AxesImage at 0x11eb4d450>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
